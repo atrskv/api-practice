@@ -102,6 +102,7 @@ def test_login_user():
     result: Response = regres_session().post(
 
         url='/api/login',
+
         json={
             'email': email,
             'password': password
@@ -121,7 +122,9 @@ def test_unsuccessful_login_user():
 
     # WHEN:
     result: Response = regres_session().post(
+
         url='/api/login',
+
         json={
             'email': email
     }
