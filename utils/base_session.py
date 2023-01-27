@@ -9,4 +9,4 @@ class BaseSession(Session):
 		return super().request(method, url=f'{self.base_url}{url}', **kwargs)
 
 def regres_session():
-	return BaseSession(base_url='https://reqres.in/')
+	return BaseSession(base_url='https://reqres.in')
