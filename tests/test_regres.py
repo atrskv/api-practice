@@ -4,6 +4,7 @@ from schemas import schemas
 
 
 def test_create_user(reqres):
+
     name = 'aleksei'
     job = 'qa'
 
@@ -24,6 +25,7 @@ def test_create_user(reqres):
 
 
 def test_update_user(reqres):
+
     name = 'Sasha'
     job = 'qa'
     new_name = 'Aleksei'
@@ -56,6 +58,7 @@ def test_update_user(reqres):
 
 
 def test_register_user(reqres):
+
     email = 'eve.holt@reqres.in'
     password = 'qwerty'
 
@@ -75,6 +78,7 @@ def test_register_user(reqres):
 
 
 def test_login_user(reqres):
+
     email = 'eve.holt@reqres.in'
     password = 'cityslicka'
 
@@ -94,6 +98,7 @@ def test_login_user(reqres):
 
 
 def test_unsuccessful_login_user(reqres):
+
     email = 'peter@klaven'
 
     result: Response = reqres.post(
