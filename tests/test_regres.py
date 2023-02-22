@@ -1,18 +1,16 @@
 from requests import Response
 from pytest_voluptuous import S
-from utils.base_session import regres_session
-
 from schemas import schemas
 
 
-def test_create_user():
+def test_create_user(reqres):
 
     # GIVEN:
     name = 'aleksei'
     job = 'qa'
 
     # WHEN:
-    result: Response = regres_session().post(
+    result: Response = reqres.post(
 
         url='/api/users',
 
@@ -30,16 +28,16 @@ def test_create_user():
     assert result.json()['job'] == job
 
 
-def test_update_user():
+def test_update_user(reqres):
 
     # GIVEN:
-    name = 'aleksei'
+    name = 'Sasha'
     job = 'qa'
     new_name = 'Aleksei'
     new_job = 'qa_automation'
 
     # TBD: MOVE TO FIXTURE?
-    prepare_user: Response = regres_session().post(
+    prepare_user: Response = reqres.post(
 
         url='/api/users',
 
@@ -50,7 +48,7 @@ def test_update_user():
     )
 
     # WHEN:
-    result: Response = regres_session().put(
+    result: Response = reqres.put(
 
         url='/api/users/2',
 
@@ -68,14 +66,14 @@ def test_update_user():
     assert result.json()['name'] == new_name
 
 
-def test_register_user():
+def test_register_user(reqres):
 
     # GIVEN:
     email = 'eve.holt@reqres.in'
     password = 'qwerty'
 
     # WHEN:
-    result: Response = regres_session().post(
+    result: Response = reqres.post(
 
         url='/api/register',
 
@@ -92,14 +90,14 @@ def test_register_user():
     assert len(result.json()['token']) == 17
 
 
-def test_login_user():
+def test_login_user(reqres):
 
     # GIVEN:
     email = 'eve.holt@reqres.in'
     password = 'cityslicka'
 
     # WHEN:
-    result: Response = regres_session().post(
+    result: Response = reqres.post(
 
         url='/api/login',
 
@@ -115,13 +113,13 @@ def test_login_user():
     assert len(result.json()['token']) == 17
 
 
-def test_unsuccessful_login_user():
+def test_unsuccessful_login_user(reqres):
 
     # GIVEN:
     email = 'peter@klaven'
 
     # WHEN:
-    result: Response = regres_session().post(
+    result: Response = reqres.post(
 
         url='/api/login',
 
